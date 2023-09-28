@@ -12,6 +12,72 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String _text = '';
 
+  void _addPoint() {
+    if (_text.endsWith('.')) {
+      return;
+    }
+    if (_text.contains('+')) {
+      if (_text.endsWith('+')) {
+        setState(() {
+          _text = '${_text}0.';
+        });
+        return;
+      } else {
+        final String secondNum =
+            _text.substring(_text.indexOf('+') + 1, _text.length);
+        if (secondNum.contains('.')) {
+          return;
+        }
+      }
+    } else if (_text.contains('-')) {
+      if (_text.endsWith('-')) {
+        setState(() {
+          _text = '${_text}0.';
+        });
+        return;
+      } else {
+        final String secondNum =
+        _text.substring(_text.indexOf('-') + 1, _text.length);
+        if (secondNum.contains('.')) {
+          return;
+        }
+      }
+    } else if (_text.contains('*')) {
+      if (_text.endsWith('*')) {
+        setState(() {
+          _text = '${_text}0.';
+        });
+        return;
+      } else {
+        final String secondNum =
+        _text.substring(_text.indexOf('*') + 1, _text.length);
+        if (secondNum.contains('.')) {
+          return;
+        }
+      }
+    } else if (_text.contains('/')) {
+      if (_text.endsWith('/')) {
+        setState(() {
+          _text = '${_text}0.';
+        });
+        return;
+      } else {
+        final String secondNum =
+        _text.substring(_text.indexOf('/') + 1, _text.length);
+        if (secondNum.contains('.')) {
+          return;
+        }
+      }
+    } else {
+      if (_text.contains('.')) {
+        return;
+      }
+    }
+    setState(() {
+      _text = '$_text.';
+    });
+  }
+
   void _addNumber(int number) {
     setState(() {
       if (_text == '0') {
@@ -53,8 +119,8 @@ class _HomePageState extends State<HomePage> {
       });
     } else if (_text.contains('-')) {
       double firstNumber = double.parse(_text.substring(0, _text.indexOf('-')));
-      double? secondNumber =
-          double.tryParse(_text.substring(_text.indexOf('-') + 1, _text.length));
+      double? secondNumber = double.tryParse(
+          _text.substring(_text.indexOf('-') + 1, _text.length));
       setState(() {
         if (secondNumber != null) {
           _text = '${firstNumber - secondNumber}';
@@ -64,8 +130,8 @@ class _HomePageState extends State<HomePage> {
       });
     } else if (_text.contains('/')) {
       double firstNumber = double.parse(_text.substring(0, _text.indexOf('/')));
-      double? secondNumber =
-          double.tryParse(_text.substring(_text.indexOf('/') + 1, _text.length));
+      double? secondNumber = double.tryParse(
+          _text.substring(_text.indexOf('/') + 1, _text.length));
       setState(() {
         if (secondNumber != null) {
           _text = '${firstNumber / secondNumber}';
@@ -75,8 +141,8 @@ class _HomePageState extends State<HomePage> {
       });
     } else if (_text.contains('*')) {
       double firstNumber = double.parse(_text.substring(0, _text.indexOf('*')));
-      double? secondNumber =
-          double.tryParse(_text.substring(_text.indexOf('*') + 1, _text.length));
+      double? secondNumber = double.tryParse(
+          _text.substring(_text.indexOf('*') + 1, _text.length));
       setState(() {
         if (secondNumber != null) {
           _text = '${firstNumber * secondNumber}';
@@ -97,9 +163,7 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
-            SizedBox(
-              height: 100,
-            ),
+            SizedBox(height: 100),
             Container(
               height: 85,
               width: 400,
@@ -214,23 +278,23 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 CommonButton(
                   text: '.',
                   onTap: () {
-                    _addArithmetic('.');
+                    _addPoint();
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '0',
                   onTap: () {
                     _addNumber(0);
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: 'CLR',
                   onTap: () {
@@ -239,7 +303,7 @@ class _HomePageState extends State<HomePage> {
                     });
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '+',
                   onTap: () {
@@ -248,10 +312,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(400, 60),
+                minimumSize: const Size(400, 60),
                 backgroundColor: Colors.deepPurple,
               ),
               onPressed: () {
